@@ -1,0 +1,6 @@
+WARNING DAGGEN_0523: "The source is compiled without the -dbg switch. Line breakpoints and assertion debug will not be available."
+MESSAGE "File: R:\Projects\vhdl projects\gorup12_project\phase1\src\neural_net.vhd" 
+MESSAGE "Compile Package "custom_types"" 
+MESSAGE "Compile Entity "model"" 
+MESSAGE "Compile Architecture "behavioral" of Entity "model"" 
+SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time :  63.0 [ms]" 

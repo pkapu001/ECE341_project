@@ -1,0 +1,1 @@
+-w -erf "R:/Projects/vhdl projects/gorup12_project/phase1/compile/phase1.erf" -d "R:/Projects/vhdl projects/gorup12_project/phase1/compile" -s "R:/Projects/vhdl projects/gorup12_project/library.cfg" -j "R:/Projects/vhdl projects/gorup12_project/phase1/projlib.cfg" -work phase1 -O3 -e 100 -work phase1 -2002 "R:/Projects/vhdl projects/gorup12_project/phase1/src/neural_net.vhd" 

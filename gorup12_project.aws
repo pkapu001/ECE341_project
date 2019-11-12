@@ -1,0 +1,12 @@
+[Version]
+Version=10.5a
+[Designs]
+phase1=.\phase1\phase1.adf
+[Browser]
+sort=order
+mode=none
+[Order]
+order=1
+macro=
+[Expand]
+phase1=1

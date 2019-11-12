@@ -1,0 +1,36 @@
+Active-HDL 10.5a.12.6914 2019-11-12 14:00:08
+
+Elaboration top modules:
+Architecture                  TB_ARCHITECTURE(model_tb)
+
+
+--------------------------------------------------------------------------------------------------
+Entity   | Architecture    | Library       | Info | Compiler Version        | Compilation Options
+--------------------------------------------------------------------------------------------------
+model_tb | TB_ARCHITECTURE | phase1        |      | 10.5a.12.6914 (Windows) | -O3
+model    | behavioral      | phase1        |      | 10.5a.12.6914 (Windows) | -O3
+--------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------
+VHDL Package               | Library       | Info | Compiler Version        | Compilation Options
+--------------------------------------------------------------------------------------------------
+standard                   | std           |      |                         | <unavailable>
+TEXTIO                     | std           |      |                         | <unavailable>
+std_logic_1164             | ieee          |      |                         | <unavailable>
+fixed_float_types          | ieee_proposed |      |                         | <unavailable>
+MATH_REAL                  | ieee          |      |                         | <unavailable>
+NUMERIC_STD                | ieee          |      |                         | <unavailable>
+fixed_pkg                  | ieee_proposed |      |                         | <unavailable>
+custom_types               | phase1        |      |                         | <unavailable>
+std_logic_arith            | ieee          |      |                         | <unavailable>
+STD_LOGIC_UNSIGNED         | ieee          |      |                         | <unavailable>
+--------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------
+Library                    | Comment
+------------------------------------------------------------------------------------------------------------------
+ieee                       | Standard IEEE packages library
+ieee_proposed              | VHDL '93 compatible version of the proposed packages for the IEEE 1076-2008 standard
+phase1                     | None
+std                        | Standard VHDL library
+------------------------------------------------------------------------------------------------------------------

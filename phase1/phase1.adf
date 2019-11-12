@@ -1,0 +1,52 @@
+[Project]
+Current Flow=Multivendor
+VCS=0
+version=4
+Current Config=compile
+[Configurations]
+compile=phase1
+[Library]
+phase1=.\phase1\phase1.lib
+[Settings]
+AccessRead=0
+AccessReadWrite=0
+AccessACCB=0
+AccessACCR=0
+AccessReadWriteSLP=0
+AccessReadTopLevel=1
+DisableC=1
+ENABLE_ADV_DATAFLOW=0
+FLOW_TYPE=HDL
+LANGUAGE=VHDL
+REFRESH_FLOW=1
+FLOWTOOLS=ONLY_IMPL
+ON_SERVERFARM_SYNTH=0
+ON_SERVERFARM_IMPL=0
+ON_SERVERFARM_SIM=0
+DVM_DISPLAY=NO
+[LocalVerilogSets]
+EnableSLP=1
+EnableDebug=0
+[LocalVhdlSets]
+CompileWithDebug=0
+[$LibMap$]
+phase1=.
+Active_lib=
+[IMPLEMENTATION]
+UCF=
+[Files]
+/neural_net.vhd=-1
+TestBench/model_TB.vhd=-1
+TestBench/model_TB_runtest.do=-1
+[Files.Data]
+.\src\neural_net.vhd=VHDL Source Code
+.\src\TestBench\model_TB.vhd=VHDL Test Bench
+.\src\TestBench\model_TB_runtest.do=Macro
+[SpecTracer]
+WindowVisible=0
+[HierarchyViewer]
+HierarchyInformation=
+ShowHide=ShowTopLevel
+Selected=
+[Groups]
+TestBench=1

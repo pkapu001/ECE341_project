@@ -1,0 +1,6 @@
+[CACHESIMPLE|Aldec.SymbolsCommands.7]
+phase1=1
+Built-in symbols=0
+[COMPILESTATUS|.\src\neural_net.vhd]
+FileTimeLow=30775296
+Status=Modified
