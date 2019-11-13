@@ -1,6 +1,6 @@
-107
+122
 ~E 1 "../src/neural_net.vhd" 31 model
 ~A 1 "../src/neural_net.vhd" 59 behavioral
 ~E 1 "../src/TestBench/model_TB.vhd" 17 model_tb
 ~A 1 "../src/TestBench/model_TB.vhd" 30 TB_ARCHITECTURE
-~C 1 "../src/TestBench/model_TB.vhd" 277 testbench_for_model
+~C 1 "../src/TestBench/model_TB.vhd" 268 testbench_for_model

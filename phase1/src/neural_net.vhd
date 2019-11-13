@@ -34,7 +34,7 @@ entity model is
 		number_of_layers : integer := 2;  
 		max_num_neurons_in_layer : integer := 20;
 		number_of_neurons_per_layer : int_array(0 to 2) := (10, 10, 5); 		 -- first index represents the inputs (only 2 layers here)		
-		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (11, 11); -- hardcoded for now
+		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (11, 5); -- hardcoded for now
 		sfixed_first : integer := 7;                                         -- 8 bits left of decimal point
 		sfixed_second : integer := -8                                        -- 8 bits right of decimal point
 	);

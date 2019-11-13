@@ -7,4 +7,4 @@ MESSAGE "File: R:\Projects\vhdl projects\gorup12_project\phase1\src\TestBench\mo
 MESSAGE "Compile Entity "model_tb"" 
 MESSAGE "Compile Architecture "TB_ARCHITECTURE" of Entity "model_tb"" 
 MESSAGE "Compile Configuration "TESTBENCH_FOR_model"" 
-SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time :  94.0 [ms]" 
+SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time :  0.1 [s]" 
