@@ -17,11 +17,11 @@ use ieee.math_real.all;
 entity model_tb is
 	-- Generic declarations of the tested unit
 	generic(
-		number_of_inputs : INTEGER := 2;
+		number_of_inputs : INTEGER := 10;
 		number_of_layers : INTEGER := 2;
 		max_num_neurons_in_layer : INTEGER := 20;
-		number_of_neurons_per_layer : int_array(0 to 2) := (2, 2, 1);
-		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (3, 3);
+		number_of_neurons_per_layer : int_array(0 to 2) := (10, 10, 5);
+		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (11, 11);
 		sfixed_first : integer := 7;
 		sfixed_second : integer := -8
 	);
@@ -31,8 +31,8 @@ architecture TB_ARCHITECTURE of model_tb is
 	-- Component declaration of the tested unit
 	component model
 		generic(
-			number_of_inputs : INTEGER := 2;
-			number_of_layers : INTEGER := 2;
+			number_of_inputs : INTEGER := 10;
+			number_of_layers : INTEGER := 3;
 			max_num_neurons_in_layer : INTEGER := 20;
 			number_of_neurons_per_layer : int_array(0 to 2);
 			number_of_weights_per_neuron_in_layer : int_array(0 to 1);
@@ -141,49 +141,74 @@ begin
 		end loop;  
 		
 		-- develop the first layer
-		for i in 0 to max_num_neurons_in_layer loop
-			if (i = 0) then
-			   	tmp_weights_array_1(i) := to_sfixed(2.9531, sfixed_first, sfixed_second); --"0000001011110011";
-				tmp_weights_array_2(i) := to_sfixed(-2.9171, sfixed_first, sfixed_second); --"1111110100010101";
-			elsif (i = 1) then
-			   	tmp_weights_array_1(i) := to_sfixed(-5.8151, sfixed_first, sfixed_second); --"1111101000101111";
-				tmp_weights_array_2(i) := to_sfixed(-5.5621, sfixed_first, sfixed_second); --"1111101001110000";
-			elsif (i = 2) then 
-				tmp_weights_array_1(i) := to_sfixed(5.9434, sfixed_first, sfixed_second); --"0000010111110001";
-				tmp_weights_array_2(i) := to_sfixed(5.3736, sfixed_first, sfixed_second); --"0000010101011111";
-			else 
-				tmp_weights_array_1(i) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
-				tmp_weights_array_2(i) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
+		for i in 0 to max_num_neurons_in_layer-1 loop
+			if(i mod 2 = 0) then
+				layer_1_data(i)(0) := to_sfixed(2.9531, sfixed_first, sfixed_second);	  -- loading bias for later 1 neuron 0,2,4... first neuron of every xor
+			else
+				layer_1_data(i)(0) := to_sfixed(-2.9171, sfixed_first, sfixed_second);	  -- loading bias for later 1 neuron 1,3,5... second neuron of every xor			
 			end if;
+			for j in 1 to max_num_neurons_in_layer loop
+			if (i* 2 + 1 = j ) then														  -- if j = 1,3,5 weight 1st neuron from previous layer for every xor 
+				
+			-- 	tmp_weights_array_1(i) := to_sfixed(2.9531, sfixed_first, sfixed_second); --"0000001011110011";
+			--	tmp_weights_array_2(i) := to_sfixed(-2.9171, sfixed_first, sfixed_second); --"1111110100010101"; 
+			
+				if(i mod 2 = 0) then
+					layer_1_data(i)(j) := to_sfixed(-5.8151, sfixed_first, sfixed_second); -- loading first neuron weight for 2nd input of every  first neuron
+				else
+					layer_1_data(i)(j) := to_sfixed(-5.5621, sfixed_first, sfixed_second); --loading first neuron weight for 1nd input of every  first neuron					
+				end if;
+			elsif ((i+1)*2 = j) then
+			--  tmp_weights_array_1(i) := to_sfixed(-5.8151, sfixed_first, sfixed_second); --"1111101000101111";
+			--	tmp_weights_array_2(i) := to_sfixed(-5.5621, sfixed_first, sfixed_second); --"1111101001110000";
+			
+				if(i mod 2 = 0) then
+					layer_1_data(i)(j) := to_sfixed(5.9434, sfixed_first, sfixed_second);
+				else
+					layer_1_data(i)(j) := to_sfixed(5.3736, sfixed_first, sfixed_second);				
+				end if;
+				--layer_1_data(i)(j):= to_sfixed(-5.3736, sfixed_first, sfixed_second); --"1111101000101111";
+			--elsif (i = 2) then 
+				--tmp_weights_array_1(i) := to_sfixed(5.9434, sfixed_first, sfixed_second); --"0000010111110001";
+				--tmp_weights_array_2(i) := to_sfixed(5.3736, sfixed_first, sfixed_second); --"0000010101011111";
+			else
+			--	tmp_weights_array_1(i) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
+			--	tmp_weights_array_2(i) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";	
+				layer_1_data(i)(j):=to_sfixed(0, sfixed_first, sfixed_second);
+			end if;
+			end loop  ;
 		end loop;
 		for i in 0 to max_num_neurons_in_layer - 1 loop
 			if (i = 0) then
-				layer_1_data(i) := tmp_weights_array_1;
+			--	layer_1_data(i) := tmp_weights_array_1;
 			elsif (i = 1) then
-				layer_1_data(i) := tmp_weights_array_2;
+			--	layer_1_data(i) := tmp_weights_array_2;
 			else
-				layer_1_data(i) := empty_weights_array;
+			--	layer_1_data(i) := empty_weights_array;
 			end if;		
 		end loop;  
 		
 		-- develop the second layer
-		for i in 0 to max_num_neurons_in_layer loop
-			if (i = 0) then
-				tmp_weights_array_1(i) := to_sfixed(3.9713, sfixed_first, sfixed_second); --"0000001111111000";
-			elsif (i = 1) then
-				tmp_weights_array_1(i) := to_sfixed(-8.4911, sfixed_first, sfixed_second); --"1111011110000010"; 
-				--report "-8.4911 => " & real'image(to_real(to_sfixed(-8.4911, sfixed_first, sfixed_second))) severity error;
-			elsif (i = 2) then
-				tmp_weights_array_1(i) := to_sfixed(8.9247, sfixed_first, sfixed_second); --"0000100011101100";
-			else 
-				tmp_weights_array_1(i) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
-			end if;
+		for i in 0 to max_num_neurons_in_layer-1 loop
+			 	layer_2_data(i)(0) := to_sfixed(3.9713, sfixed_first, sfixed_second);
+			for j in 1 to max_num_neurons_in_layer loop
+				if (i*2 +1 = j and j<12 ) then
+					layer_2_data(i)(j) := to_sfixed(-8.4911, sfixed_first, sfixed_second); --"0000001111111000";
+				--elsif (i = 1) then
+					--tmp_weights_array_1(i) := to_sfixed(-8.4911, sfixed_first, sfixed_second); --"1111011110000010"; 
+					--report "-8.4911 => " & real'image(to_real(to_sfixed(-8.4911, sfixed_first, sfixed_second))) severity error;
+				elsif ((i+1)*2 = j) then
+					layer_2_data(i)(j) := to_sfixed(8.9247, sfixed_first, sfixed_second); --"0000100011101100";
+				else 
+					layer_2_data(i)(j) := to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
+				end if;			
+			end loop;
 		end loop;
 		for i in 0 to max_num_neurons_in_layer - 1 loop
 			if (i = 0) then
-				layer_2_data(i) := tmp_weights_array_1;		
+				--layer_2_data(i) := tmp_weights_array_1;		
 			else 
-				layer_2_data(i) := empty_weights_array;
+				--layer_2_data(i) := empty_weights_array;
 			end if;
 		end loop;
 		
@@ -200,17 +225,28 @@ begin
 		LOAD_LAYER_NUMBER <= "0001";
 		wait for clk_half_period * 2;
 		
+		INPUT(0) <= to_sfixed(0, sfixed_first, sfixed_second);
+		INPUT(1) <= to_sfixed(0, sfixed_first, sfixed_second);
+		INPUT(2) <= to_sfixed(1, sfixed_first, sfixed_second);
+		INPUT(3) <= to_sfixed(0, sfixed_first, sfixed_second);
+		INPUT(4) <= to_sfixed(0, sfixed_first, sfixed_second);
+		INPUT(5) <= to_sfixed(1, sfixed_first, sfixed_second);
+		INPUT(6) <= to_sfixed(1, sfixed_first, sfixed_second);
+		INPUT(7) <= to_sfixed(1, sfixed_first, sfixed_second);
+		INPUT(8) <= to_sfixed(0, sfixed_first, sfixed_second);
+		INPUT(9) <= to_sfixed(0, sfixed_first, sfixed_second);
+		
 		-- start the inference calculation... use 01 as the input
 		-- get our input ready (1, 0) (plus an extra 18 0's)
-		for i in 0 to max_num_neurons_in_layer - 1 loop
-			if (i = 0) then
-				INPUT(i) <= to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";	
-			elsif (i = 1) then
-				INPUT(i) <= to_sfixed(1, sfixed_first, sfixed_second); --"0000000100000000";
-			else 
-				INPUT(i) <= to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
-			end if;
-		end loop;
+		--for i in 0 to max_num_neurons_in_layer - 1 loop
+		--	if (i = 0) then
+			--	INPUT(i) <= to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";	
+			--elsif (i = 1) then
+			--	INPUT(i) <= to_sfixed(0, sfixed_first, sfixed_second); --"0000000100000000";
+			--else 
+			--	INPUT(i) <= to_sfixed(0, sfixed_first, sfixed_second); --"0000000000000000";
+			--end if;
+		-- end loop; 
 		-- start!
 		LOAD <= '0';
 		START <= '1';

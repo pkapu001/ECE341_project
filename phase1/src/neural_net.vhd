@@ -24,15 +24,17 @@ use ieee_proposed.fixed_pkg.all;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.std_logic_unsigned.all;
-use ieee.math_real.all;
+use ieee.math_real.all;		  
+
+-- changes made : changed the number of layers in generic line: 34
 
 entity model is	 
 	generic(
-		number_of_inputs : integer := 2;
+		number_of_inputs : integer := 10;
 		number_of_layers : integer := 2;  
 		max_num_neurons_in_layer : integer := 20;
-		number_of_neurons_per_layer : int_array(0 to 2) := (2, 2, 1); 		 -- first index represents the inputs (only 2 layers here)		
-		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (3, 3); -- hardcoded for now
+		number_of_neurons_per_layer : int_array(0 to 2) := (10, 10, 5); 		 -- first index represents the inputs (only 2 layers here)		
+		number_of_weights_per_neuron_in_layer : int_array(0 to 1) := (11, 11); -- hardcoded for now
 		sfixed_first : integer := 7;                                         -- 8 bits left of decimal point
 		sfixed_second : integer := -8                                        -- 8 bits right of decimal point
 	);
@@ -55,7 +57,7 @@ entity model is
 end entity model;	
 
 architecture behavioral of model is		
-	signal neural_network : neural_network(0 to number_of_layers - 1);
+	signal neural_network : neural_network(0 to number_of_layers-1 );
 begin
 	process	
 	begin
